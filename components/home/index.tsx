@@ -13,9 +13,9 @@ const navegationOfHome = [
 ];
 export function HomeComponents() {
   return (
-    <div className='grid grid-cols-[repeat(1,300px_1fr)] h-full max-sm:block'>
+    <div className='grid grid-cols-[repeat(1,300px_1fr)] h-full max-md:block'>
       <div>
-        <div className='flex flex-col justify-between pt-16 pb-8 border-r-2 border-r-primary max-sm:hidden fixed bottom-0 top-[4.5rem] p-[4.8rem]'>
+        <div className='flex flex-col justify-between pt-16 pb-8 border-r-2 border-r-primary max-md:hidden fixed bottom-0 top-[4.5rem] p-[4.8rem]'>
           <div className='flex flex-col gap-8 '>
             {navegationOfHome.map((nav) => (
               <Link

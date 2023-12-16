@@ -41,12 +41,7 @@ export function Publish() {
                 document.body.style.overflow = 'hidden';
                 setOpenCreatePubli(true);
               }}>
-              {item.svg}{' '}
-              <span
-                className='max-md:hidde
-              n'>
-                {item.text}
-              </span>
+              {item.svg} <span className='max-sm:hidden'>{item.text}</span>
             </button>
           ))}
         </div>

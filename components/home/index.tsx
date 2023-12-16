@@ -28,14 +28,16 @@ export function HomeComponents() {
             ))}
           </div>
           <div className=''>
-            <Link href={"/help"} className='font-bold flex gap-4 hover:text-primary'>
+            <Link
+              href={'/help'}
+              className='font-bold flex gap-4 hover:text-primary'>
               <HelpSvg />
               Ayuda
             </Link>
           </div>
         </div>
       </div>
-      <div className='grid grid-rows-[repeat(1,150px_1fr)] p-4'>
+      <div className='grid grid-rows-[repeat(1,150px_1fr)] p-4 max-sm:p-2'>
         <div className='m-auto w-full'>
           <Publish />
         </div>

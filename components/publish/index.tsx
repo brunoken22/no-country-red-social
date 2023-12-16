@@ -54,8 +54,8 @@ export function Publish() {
       {openCreatePubli ? (
         <div className='absolute inset-0 backdrop-blur	flex justify-center items-center text-white'>
           <div
-            className='w-[500px] h-[500px] bg-secundary rounded-lg
-           p-4 flex flex-col gap-[1.5rem]'>
+            className='w-[500px] h-[600px] bg-secundary rounded-lg
+           p-4 flex flex-col gap-[1.5rem] max-sm:w-[90%]'>
             <div className='flex relative justify-center items-center'>
               <h2 className='text-white font-semibold '>Crear publicación</h2>
               <button
@@ -70,7 +70,7 @@ export function Publish() {
                 <p
                   contentEditable='true'
                   aria-placeholder='que estas pensando'
-                  className={`text-white outline-0  max-h-[250px] min-h-[70px] text-2xl	overflow-auto	`}></p>
+                  className={`text-white outline-0  max-h-[250px] min-h-[100px] text-2xl	overflow-auto	`}></p>
               </div>
               <div className='flex flex-col gap-6'>
                 <div className='flex justify-between rounded-lg border-2 border-[#ddd] p-2'>
@@ -84,8 +84,8 @@ export function Publish() {
                     </button>
                   </div>
                 </div>
-                <div className=' bg-primary rounded-lg'>
-                  <button className='text-center p-2 w-full'>Publicar</button>
+                <div className=' bg-primary rounded-lg hover:opacity-70'>
+                  <button className='text-center p-2 w-full '>Publicar</button>
                 </div>
               </div>
             </div>

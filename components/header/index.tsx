@@ -41,20 +41,28 @@ export function Header() {
                   className='h-[40px] rounded-lg text-black indent-1 w-full'
                 />
               </div>
-              <button
-                className='relative'
-                onBlur={() => setOpenSettingUser(false)}>
-                <div className='w-[45px] h-[43px] rounded-full bg-white  hover:opacity-70	'>
-                  <UserSVG
-                    onClick={() => setOpenSettingUser(!openSettingUser)}
-                  />
-                </div>
+              <div className='relative'>
+                <button>
+                  <div className='w-[45px] h-[43px] rounded-full bg-white  hover:opacity-70	'>
+                    <UserSVG
+                      onClick={() => setOpenSettingUser(!openSettingUser)}
+                    />
+                  </div>
+                </button>
                 {openSettingUser ? (
                   <>
-                    <div className='absolute bg-white text-primary p-4 right-0'>
+                    <div
+                      className='absolute bg-white text-primary p-4 right-0 '
+                      onBlur={() => {
+                        console.log('click');
+                        setOpenSettingUser(false);
+                      }}>
                       <Link
                         href={'/profile'}
-                        className='font-medium hover:opacity-70 block'>
+                        className='font-medium hover:opacity-70 block'
+                        onBlur={() => {
+                          console.log('Focus');
+                        }}>
                         Perfil
                       </Link>
                       <Link
@@ -65,7 +73,7 @@ export function Header() {
                     </div>
                   </>
                 ) : null}
-              </button>
+              </div>
             </>
           )}
         </nav>

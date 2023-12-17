@@ -17,14 +17,14 @@ export function Header() {
 
   return (
     pathname !== '/' && (
-      <header className='bg-primary text-white fixed right-0	 left-0'>
+      <header className='bg-primary text-white fixed right-0	 left-0 z-10'>
         <nav className='flex justify-between items-center ml-[2rem] mr-[2rem] max-md:pt-4 max-md:pb-4 max-md:ml-1 max-md:mr-1 gap-4'>
           <Link
             href={'/'}
             className={`${lilita_One.className} text-[3rem] max-md:text-[1.5rem] `}>
             Interactify
           </Link>
-          {pathname !== '/home' ? (
+          {pathname == '/signin' || pathname == '/signup' ? (
             <div className='flex gap-4'>
               {navegationLink.map((nav: TypeNavegationLink) => (
                 <Link href={nav.link} key={nav.text}>

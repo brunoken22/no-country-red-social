@@ -1,15 +1,35 @@
 import Image from 'next/image';
 import UserSvg from '@/ui/icons/user.svg';
 
-export function TemplatePhotoProfile() {
+export function TemplatePhotoProfile({
+  width,
+  height,
+  img,
+  style,
+}: {
+  width?: string;
+  height?: string;
+  style?: string;
+  img?: string;
+}) {
   return (
-    <div className='flex gap-4'>
-      <div className='rounded-full p-2 bg-white '>
+    <div
+      className={`rounded-full border-[2px] border-primary bg-white ${
+        width || 'w-45px'
+      } ${height || 'h-43px'}
+      ${style || ''}
+    flex items-center justify-center relative`}>
+      {img ? (
+        <Image
+          src={img}
+          fill
+          objectFit='cover'
+          alt='user'
+          className='rounded-[inherit] w-full h-full object-cover'
+        />
+      ) : (
         <UserSvg />
-      </div>
-      <div className='text-white'>
-        <h2 className='text-xl'>Tú</h2>
-      </div>
+      )}
     </div>
   );
 }

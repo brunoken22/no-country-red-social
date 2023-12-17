@@ -1,3 +1,10 @@
+import {NavegationComponent} from '@/components/navegation';
+import {ProfileComponent} from '@/components/profile';
+
 export default function Profile() {
-  return <div>Profile</div>;
+  return (
+    <NavegationComponent>
+      <ProfileComponent />
+    </NavegationComponent>
+  );
 }

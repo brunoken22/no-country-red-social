@@ -29,6 +29,7 @@ export function ProfileComponent() {
         <div className='flex gap-8'>
           {buttonEditUser.map((nav) => (
             <Link
+              key={nav.text}
               href={nav.link}
               className='border-[1px] border-primary p-2 hover:opacity-70 font-medium rounded-lg flex gap-2'>
               {nav.svg} {nav.text}

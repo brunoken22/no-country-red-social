@@ -7,6 +7,7 @@ import {useEffect, useRef, useState} from 'react';
 import {useRecoilValue} from 'recoil';
 import {user} from '@/lib/atom';
 import {TemplatePhotoProfile} from '@/ui/templatePhotoProfile';
+import {GetUser} from '@/lib/hook';
 const lilita_One = Lilita_One({subsets: ['latin'], weight: '400'});
 
 const navegationLink = [
@@ -18,7 +19,11 @@ export function Header() {
   const pathname = usePathname();
   const [openSettingUser, setOpenSettingUser] = useState(false);
   const userDataRecoil = useRecoilValue(user);
-
+  const token =
+    typeof window !== 'undefined'
+      ? (localStorage.getItem('token') as string)
+      : '';
+  GetUser(token);
   return (
     pathname !== '/' &&
     userDataRecoil && (

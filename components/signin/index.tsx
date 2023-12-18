@@ -1,14 +1,34 @@
 'use client';
+import {SigninUser} from '@/lib/hook';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
+import {useEffect, useState} from 'react';
 
 export function SigninComponent() {
   const {push} = useRouter();
+  const [formSignin, setFormSignin] = useState<DataSingin | null>(null);
+  const {data, isLoading} = SigninUser(formSignin);
+
+  useEffect(() => {
+    if (data && !data?.user) {
+      alert('Contraseña o usuario incorrecto');
+      return;
+    }
+    if (data?.token) {
+      if (data?.token) {
+        localStorage.setItem('token', data?.token);
+      }
+      push('/home');
+    }
+  }, [data]);
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    push('/home');
+    const formElement = event.target as HTMLFormElement;
+    setFormSignin({
+      email: formElement.email.value,
+      password: formElement.password.value,
+    });
   };
-
   return (
     <div className='m-[2rem_10%] '>
       <h2 className='text-[3rem] border-b-primary	border-b-2 font-bold max-md:text-[1.5rem] max-md:border-none max-md:text-center'>
@@ -36,7 +56,7 @@ export function SigninComponent() {
           </label>
           <input
             type='password'
-            id='contraseña'
+            id='password'
             placeholder='*******'
             className='border-none bg-transparent outline-0	'
             required

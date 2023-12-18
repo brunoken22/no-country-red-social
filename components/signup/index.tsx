@@ -1,40 +1,78 @@
 'use client';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
+import {CreateUser} from '@/lib/hook';
+import {useEffect, useState} from 'react';
 const formGroup = [
   {
     nombre: 'Nombre',
     type: 'name',
+    id: 'first-name',
     placeholder: 'Allison Lucia',
   },
   {
     nombre: 'Apellido',
     type: 'name',
+    id: 'last-name',
     placeholder: 'Alvarez Rodriguez',
   },
   {
     nombre: 'Email',
     type: 'email',
+    id: 'email',
     placeholder: 'Example@gmail.com',
   },
   {
     nombre: 'Contraseña',
     type: 'password',
+    id: 'password',
     placeholder: '*****',
   },
   {
     nombre: 'Repetir contraseña',
     type: 'password',
+    id: 'repeat-password',
     placeholder: '*****',
   },
 ];
 
 export function SignupComponent() {
   const {push} = useRouter();
+  const [dataUser, setDataUser] = useState<DataUser | null>(null);
+  const {data, isLoading} = CreateUser(dataUser);
+
+  useEffect(() => {
+    if (data == 'Usuario Registrado') {
+      alert('Usuario registrado');
+    }
+    if (data?.user?.id) {
+      setDataUser(null);
+      alert('Usuario registrado con exito');
+      localStorage.setItem('token', data.token);
+      push('/home');
+    }
+  }, [data]);
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    push('/home');
+    const formElement = event.target as HTMLFormElement;
+    const validar = validarPassword(
+      formElement['repeat-password'].value,
+      formElement.password.value
+    );
+
+    if (validar) {
+      const newDataUser = {
+        fullName:
+          formElement['first-name'].value +
+          ' ' +
+          formElement['last-name'].value,
+        email: formElement.email.value,
+        password: formElement.password.value,
+      };
+      setDataUser(newDataUser);
+    }
   };
+
   return (
     <div className='m-[2rem_10%] '>
       <h2 className='text-[3rem] border-b-primary	border-b-2 font-bold max-md:text-[1.5rem] max-md:border-none max-md:text-center'>
@@ -48,12 +86,13 @@ export function SignupComponent() {
           <div
             className='flex flex-col gap-2 p-2 rounded-md border-b-2 border-b-primary'
             key={inputLab.nombre}>
-            <label htmlFor={inputLab.type} className='text-primary'>
+            <label htmlFor={inputLab.id} className='text-primary'>
               {inputLab.nombre}
             </label>
             <input
               type={inputLab.type}
-              id={inputLab.type}
+              name={inputLab.id}
+              id={inputLab.id}
               placeholder={inputLab.placeholder}
               className='border-none bg-transparent outline-0	'
               required
@@ -76,4 +115,8 @@ export function SignupComponent() {
       </form>
     </div>
   );
+}
+function validarPassword(con1: string, con2: string) {
+  if (con1 === con2) return true;
+  return false;
 }

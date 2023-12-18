@@ -1,15 +1,18 @@
+'use client';
 import Link from 'next/link';
 import EditSvg from '@/ui/icons/edit.svg';
 import SettingSvg from '@/ui/icons/settings.svg';
 import {TemplatePhotoProfile} from '@/ui/templatePhotoProfile';
 import {TemplatePublications} from '../templatePublications';
-
+import {useRecoilValue} from 'recoil';
+import {user} from '@/lib/atom';
 const buttonEditUser = [
   {text: 'Editar perfil', link: '/', svg: <EditSvg />},
   {text: 'Configuración', link: '/setting', svg: <SettingSvg />},
 ];
 export function ProfileComponent() {
-  return (
+  const userDataRecoil = useRecoilValue(user);
+  return userDataRecoil ? (
     <>
       <div className='flex justify-between items-center max-md:flex-col max-md:p-4 max-md:gap-4 pb-8'>
         <div className='flex gap-4 items-center max-md:gap-8'>
@@ -17,10 +20,12 @@ export function ProfileComponent() {
             width={'w-[150px]'}
             height={'h-[150px]'}
             style='max-md:w-[100px] max-md:h-[100px]'
-            img='https://res.cloudinary.com/dy26iktoi/image/upload/v1698511329/ozbnzkytvnq2z1dsu7vt.webp'
+            img={userDataRecoil.user.img}
           />
           <div>
-            <h2 className='font-bold text-2xl'>Allison Lucia</h2>
+            <h2 className='font-bold text-2xl'>
+              {userDataRecoil.user.fullName}
+            </h2>
             <p>📸Video creator</p>
             <p>❤Swiftie</p>
             <p>Chubut-Argentina</p>
@@ -43,5 +48,5 @@ export function ProfileComponent() {
         ))}
       </div>
     </>
-  );
+  ) : null;
 }

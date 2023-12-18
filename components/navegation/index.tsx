@@ -35,9 +35,7 @@ export function NavegationComponent({children}: {children: React.ReactNode}) {
           </div>
         </div>
       </div>
-      <div className='grid grid-rows-[repeat(1,auto_1fr)] p-4 max-sm:p-2'>
-        {children}
-      </div>
+      <div className='grid grid-rows-[repeat(1,auto_1fr)] p-4 '>{children}</div>
     </div>
   );
 }

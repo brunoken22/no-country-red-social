@@ -9,6 +9,8 @@ import Link from 'next/link';
 import {useState} from 'react';
 import {TemplatePhotoProfile} from '@/ui/templatePhotoProfile';
 import EmojiPicker, {EmojiStyle} from 'emoji-picker-react';
+import {useRecoilValue} from 'recoil';
+import {user} from '@/lib/atom';
 const itemPublic = [
   {text: 'Trasmisión en vivo', svg: <CameraSvg />},
   {text: 'Fotos y videos', svg: <GaleriaSvg />},
@@ -18,11 +20,16 @@ export function Publish() {
   const [openCreatePubli, setOpenCreatePubli] = useState(false);
   const [changePublic, setChangePublic] = useState('');
   const [openEmoji, setOpenEmoji] = useState(false);
+  const userDataRecoil = useRecoilValue(user);
 
-  return (
+  return userDataRecoil ? (
     <div className='flex gap-4 p-4 border-2 border-b-[5px] border-primary rounded-md items-center text-primary'>
       <Link href={'/profile'} className=' hover:opacity-70'>
-        <UserSvg />
+        <TemplatePhotoProfile
+          img={userDataRecoil.user.img}
+          width={'w-[80px]'}
+          height={'h-[80px]'}
+        />
       </Link>
       <div className='w-full flex flex-col gap-2'>
         <button
@@ -57,25 +64,37 @@ export function Publish() {
               <h2 className='text-white font-semibold '>Crear publicación</h2>
               <button
                 className='absolute right-0 bg-gray-400 rounded-full p-[0.2rem_0.3rem]'
-                onClick={() => setOpenCreatePubli(false)}>
+                onClick={() => {
+                  setOpenCreatePubli(false);
+                  document.body.style.overflow = 'auto';
+                }}>
                 <CloseSvg />
               </button>
             </div>
             <div className='flex justify-between h-full flex-col gap-4'>
               <div className='flex gap-4 flex-col relative'>
-                <TemplatePhotoProfile />
+                <div className='flex gap-4 items-center'>
+                  <TemplatePhotoProfile
+                    width={'w-[80px]'}
+                    height={'h-[80px]'}
+                    img={userDataRecoil.user.img}
+                  />
+                  <h2 className='text-[1.5rem]'>
+                    {userDataRecoil.user.fullName}
+                  </h2>
+                </div>
                 <div className='relative  '>
                   <textarea
                     className={`text-white outline-0  max-h-[250px] min-h-[100px] text-2xl	overflow-auto	placeholder:text-red-100 relative z-10 bg-transparent w-full resize-none	`}
                     onChange={(e: any) => {
                       setChangePublic(e.target.value);
                     }}
-                    placeholder='Qué estás pensando Allison?'
+                    placeholder={`Qué estás pensando ${userDataRecoil.user.fullName}?`}
                     value={changePublic}></textarea>
                 </div>
               </div>
               <div className='flex flex-col gap-6'>
-                <div className='flex justify-between rounded-lg border-2 border-[#ddd] p-2'>
+                <div className='flex justify-between rounded-lg border-2 border-[#2b2a2a] p-2'>
                   <h2 className=''>Agregar a tu publicación</h2>
                   <div className='flex gap-4 relative'>
                     <button className=' hover:opacity-70'>
@@ -115,5 +134,5 @@ export function Publish() {
         </div>
       ) : null}
     </div>
-  );
+  ) : null;
 }

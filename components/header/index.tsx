@@ -4,6 +4,9 @@ import {usePathname} from 'next/navigation';
 import Link from 'next/link';
 import UserSVG from '@/ui/icons/user.svg';
 import {useEffect, useRef, useState} from 'react';
+import {useRecoilValue} from 'recoil';
+import {user} from '@/lib/atom';
+import {TemplatePhotoProfile} from '@/ui/templatePhotoProfile';
 const lilita_One = Lilita_One({subsets: ['latin'], weight: '400'});
 
 const navegationLink = [
@@ -14,9 +17,11 @@ const navegationLink = [
 export function Header() {
   const pathname = usePathname();
   const [openSettingUser, setOpenSettingUser] = useState(false);
+  const userDataRecoil = useRecoilValue(user);
 
   return (
-    pathname !== '/' && (
+    pathname !== '/' &&
+    userDataRecoil && (
       <header className='bg-primary text-white fixed right-0	 left-0 z-10'>
         <nav className='flex justify-between items-center ml-[2rem] mr-[2rem] max-md:pt-4 max-md:pb-4 max-md:ml-1 max-md:mr-1 gap-4'>
           <Link
@@ -41,13 +46,16 @@ export function Header() {
                   className='h-[40px] rounded-lg text-black indent-1 w-full'
                 />
               </div>
-              <div className='relative'>
-                <button>
-                  <div className='w-[45px] h-[43px] rounded-full bg-white  hover:opacity-70	'>
-                    <UserSVG
-                      onClick={() => setOpenSettingUser(!openSettingUser)}
-                    />
-                  </div>
+              <div className='relative '>
+                <button
+                  onClick={() => setOpenSettingUser(!openSettingUser)}
+                  className='hover:opacity-70'>
+                  <TemplatePhotoProfile
+                    width={'w-[60px]'}
+                    height={'h-[60px]'}
+                    style='max-md:w-[100px] max-md:h-[100px]'
+                    img={userDataRecoil.user.img}
+                  />
                 </button>
                 {openSettingUser ? (
                   <>

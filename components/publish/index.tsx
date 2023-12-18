@@ -29,6 +29,7 @@ export function Publish() {
           img={userDataRecoil.user.img}
           width={'w-[80px]'}
           height={'h-[80px]'}
+          style='max-md:w-[60px] max-md:h-[60px]'
         />
       </Link>
       <div className='w-full flex flex-col gap-2'>

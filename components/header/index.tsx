@@ -28,7 +28,7 @@ export function Header() {
     pathname !== '/' &&
     userDataRecoil && (
       <header className='bg-primary text-white fixed right-0	 left-0 z-10'>
-        <nav className='flex justify-between items-center ml-[2rem] mr-[2rem] max-md:pt-4 max-md:pb-4 max-md:ml-1 max-md:mr-1 gap-4'>
+        <nav className='flex justify-between items-center ml-[2rem] mr-[2rem]  max-md:ml-1 max-md:mr-1 gap-4 max-md:p-2'>
           <Link
             href={'/'}
             className={`${lilita_One.className} text-[3rem] max-md:text-[1.5rem] `}>
@@ -51,14 +51,14 @@ export function Header() {
                   className='h-[40px] rounded-lg text-black indent-1 w-full'
                 />
               </div>
-              <div className='relative '>
+              <div className='relative'>
                 <button
                   onClick={() => setOpenSettingUser(!openSettingUser)}
                   className='hover:opacity-70'>
                   <TemplatePhotoProfile
                     width={'w-[60px]'}
                     height={'h-[60px]'}
-                    style='max-md:w-[100px] max-md:h-[100px]'
+                    style='max-w-[50px] max-h-[50px]'
                     img={userDataRecoil.user.img}
                   />
                 </button>

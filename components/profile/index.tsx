@@ -7,7 +7,7 @@ import {TemplatePublications} from '../templatePublications';
 import {useRecoilValue} from 'recoil';
 import {user} from '@/lib/atom';
 const buttonEditUser = [
-  {text: 'Editar perfil', link: '/', svg: <EditSvg />},
+  {text: 'Editar', link: '/', svg: <EditSvg />},
   {text: 'Configuración', link: '/setting', svg: <SettingSvg />},
 ];
 export function ProfileComponent() {
@@ -31,7 +31,7 @@ export function ProfileComponent() {
             <p>Chubut-Argentina</p>
           </div>
         </div>
-        <div className='flex gap-8'>
+        <div className='flex gap-8 items-center'>
           {buttonEditUser.map((nav) => (
             <Link
               key={nav.text}

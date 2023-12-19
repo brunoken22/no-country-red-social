@@ -57,7 +57,7 @@ export function Publish() {
         </div>
       </div>
       {openCreatePubli ? (
-        <div className='absolute inset-0 backdrop-blur	flex justify-center items-center text-white'>
+        <div className='absolute inset-0 backdrop-blur	flex justify-center items-center text-white z-10'>
           <div
             className='w-[500px]  bg-secundary rounded-lg
            p-4 flex flex-col gap-[1.5rem] max-sm:w-[90%]'>

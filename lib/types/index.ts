@@ -9,14 +9,16 @@ type TypeFormGroup = {
   id?: string;
 };
 type Publicacion = {
-  id: string;
-  description: string;
-  img: string;
-  fecha: string;
-  like: [];
-  comentarios: [];
-  userId: number;
+  id?: string;
+  description?: string;
+  img?: string;
+  fecha?: string;
+  like?: [];
+  comentarios?: [];
+  userId?: number;
   open?: boolean;
+  fullName: string;
+  imgUser: string;
 };
 
 type Message = {

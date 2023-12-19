@@ -5,13 +5,25 @@ import SettingSvg from '@/ui/icons/settings.svg';
 import {TemplatePhotoProfile} from '@/ui/templatePhotoProfile';
 import {TemplatePublications} from '../templatePublications';
 import {useRecoilValue} from 'recoil';
-import {user} from '@/lib/atom';
+import {publicacionUser, user} from '@/lib/atom';
+import {GetAllPublicacionesUser} from '@/lib/hook';
+import {useState} from 'react';
 const buttonEditUser = [
   {text: 'Editar', link: '/', svg: <EditSvg />},
   {text: 'Configuración', link: '/setting', svg: <SettingSvg />},
 ];
 export function ProfileComponent() {
   const userDataRecoil = useRecoilValue(user);
+  const publicacionesUserRecoil = useRecoilValue(publicacionUser);
+  const [pagePubli, setPagePubli] = useState(0);
+  const token =
+    typeof window !== 'undefined'
+      ? (localStorage.getItem('token') as string)
+      : '';
+  const {dataPubliAllAmigosSwr, isLoadingAllAmigos} = GetAllPublicacionesUser(
+    token,
+    pagePubli
+  );
   return userDataRecoil ? (
     <>
       <div className='flex justify-between items-center max-md:flex-col max-md:p-4 max-md:gap-4 pb-8'>
@@ -42,11 +54,32 @@ export function ProfileComponent() {
           ))}
         </div>
       </div>
-      <div className='flex flex-col gap-[1.5rem] max-md:gap-4 pt-8 border-t-2  border-t-primary'>
-        {[1, 2, 3, 4].map((item: number) => (
-          <TemplatePublications key={item} />
-        ))}
-      </div>
+      {publicacionesUserRecoil.length ? (
+        <div className='flex flex-col gap-[1.5rem] max-md:gap-4 pt-8 border-t-2  border-t-primary '>
+          {publicacionesUserRecoil.map((item: Publicacion) => (
+            <TemplatePublications
+              key={item.id}
+              description={item.description}
+              img={item.img}
+              fullName={userDataRecoil.user.fullName}
+              imgUser={userDataRecoil.user.img}
+            />
+          ))}
+          {dataPubliAllAmigosSwr.length == 10 && (
+            <div className='flex items-center justify-center'>
+              <button
+                onClick={() => setPagePubli((prev) => prev + 10)}
+                className='text-primary hover:opacity-70'>
+                Más
+              </button>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className='text-center font-bold text-[1.5rem]'>
+          No hay publicaciones
+        </div>
+      )}
     </>
   ) : null;
 }

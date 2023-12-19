@@ -54,7 +54,7 @@ export function ProfileComponent() {
           ))}
         </div>
       </div>
-      {publicacionesUserRecoil.length ? (
+      {publicacionesUserRecoil?.length ? (
         <div className='flex flex-col gap-[1.5rem] max-md:gap-4 pt-8 border-t-2  border-t-primary '>
           {publicacionesUserRecoil.map((item: Publicacion) => (
             <TemplatePublications

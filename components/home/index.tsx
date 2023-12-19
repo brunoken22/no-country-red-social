@@ -8,7 +8,6 @@ import {GetAllPublicaciones} from '@/lib/hook';
 import {useState} from 'react';
 
 export function HomeComponents() {
-  const publicacionesAmigosRecoil = useRecoilValue(publicacionAmigos);
   const userDataRecoil = useRecoilValue(user);
   const [pagePubli, setPagePubli] = useState(0);
   const token =
@@ -25,15 +24,23 @@ export function HomeComponents() {
         <Publish />
       </div>
 
-      {publicacionesAmigosRecoil.length ? (
+      {dataPubliAllAmigosSwr?.length && userDataRecoil ? (
         <div className='flex flex-col gap-6 mt-8 max-md:mt-4'>
-          {publicacionesAmigosRecoil.map((item: Publicacion) => (
+          {dataPubliAllAmigosSwr.map((item: Publicacion) => (
             <TemplatePublications
               key={item.id}
               description={item.description}
               img={item.img}
-              fullName={userDataRecoil.user.fullName}
-              imgUser={userDataRecoil.user.img}
+              fullName={
+                item.userId == Number(userDataRecoil.user.id)
+                  ? 'Tú'
+                  : 'Otro usuario'
+              }
+              imgUser={
+                item.userId == Number(userDataRecoil.user.id)
+                  ? userDataRecoil.user.img
+                  : ''
+              }
             />
           ))}
           {dataPubliAllAmigosSwr.length == 10 && (

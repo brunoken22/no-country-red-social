@@ -45,7 +45,7 @@ export function NavegationComponent({children}: {children: React.ReactNode}) {
           </div>
         </div>
       </div>
-      <div className='flex w-[300px]'>
+      {/* <div className='flex w-[300px]'>
         <div>
           <h4>Nuevas</h4>
           <button>
@@ -54,7 +54,7 @@ export function NavegationComponent({children}: {children: React.ReactNode}) {
           </button>
         </div>
         <div></div>
-      </div>
+      </div> */}
       <div
         className={` p-4 ${
           pathname == '/chat' ? 'block' : 'grid grid-rows-[repeat(1,auto_1fr)]'

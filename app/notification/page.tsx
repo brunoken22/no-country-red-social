@@ -1,3 +1,10 @@
+import {NavegationComponent} from '@/components/navegation';
+import {NotificationComponents} from '@/components/notification';
+
 export default function Notification() {
-  return <div>Notification</div>;
+  return (
+    <NavegationComponent>
+      <NotificationComponents />
+    </NavegationComponent>
+  );
 }

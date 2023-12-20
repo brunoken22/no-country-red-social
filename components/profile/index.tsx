@@ -24,7 +24,7 @@ export function ProfileComponent() {
     token,
     pagePubli
   );
-  return userDataRecoil ? (
+  return userDataRecoil && dataPubliAllAmigosSwr ? (
     <>
       <div className='flex justify-between items-center max-md:flex-col max-md:p-4 max-md:gap-4 pb-8'>
         <div className='flex gap-4 items-center max-md:gap-8'>
@@ -65,7 +65,7 @@ export function ProfileComponent() {
               imgUser={userDataRecoil.user.img}
             />
           ))}
-          {[dataPubliAllAmigosSwr.length == 10] && (
+          {dataPubliAllAmigosSwr.length == 10 && (
             <div className='flex items-center justify-center'>
               <button
                 onClick={() => setPagePubli((prev) => prev + 10)}

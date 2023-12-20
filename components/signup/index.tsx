@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
-import {CreateUser} from '@/lib/hook';
+import {CreateUser, SigninUser} from '@/lib/hook';
 import {useEffect, useState} from 'react';
 const formGroup = [
   {
@@ -38,15 +38,18 @@ const formGroup = [
 
 export function SignupComponent() {
   const {push} = useRouter();
-  const [dataUser, setDataUser] = useState<DataUser | null>(null);
-  const {data, isLoading} = CreateUser(dataUser);
+  // const [dataUser, setDataUser] = useState<DataUser | null>(null);
+  // const {data, isLoading} = CreateUser(dataUser);
+  const [formSignin, setFormSignin] = useState<DataSingin | null>(null);
+
+  const {data, isLoading} = SigninUser(formSignin);
 
   useEffect(() => {
-    if (data == 'Usuario Registrado') {
-      alert('Usuario registrado');
-    }
+    // if (data == 'Usuario Registrado') {
+    //   alert('Usuario registrado');
+    // }
     if (data?.user?.id) {
-      setDataUser(null);
+      // setDataUser(null);
       alert('Usuario registrado con exito');
       localStorage.setItem('token', data.token);
       push('/home');
@@ -62,14 +65,10 @@ export function SignupComponent() {
 
     if (validar) {
       const newDataUser = {
-        fullName:
-          formElement['first-name'].value +
-          ' ' +
-          formElement['last-name'].value,
-        email: formElement.email.value,
-        password: formElement.password.value,
+        email: process.env.NEXT_PUBLIC_LOGIN as string,
+        password: process.env.NEXT_PUBLIC_PASSWORD as string,
       };
-      setDataUser(newDataUser);
+      setFormSignin(newDataUser);
     }
   };
 

@@ -25,8 +25,8 @@ export function SigninComponent() {
     event.preventDefault();
     const formElement = event.target as HTMLFormElement;
     setFormSignin({
-      email: formElement.email.value,
-      password: formElement.password.value,
+      email: process.env.NEXT_PUBLIC_LOGIN as string,
+      password: process.env.NEXT_PUBLIC_PASSWORD as string,
     });
   };
   return (

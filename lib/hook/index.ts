@@ -365,7 +365,10 @@ export function GetAmigo(id: string, token: string) {
 
   return {data, isLoading};
 }
-export function CreatePublicacion(dataPubli: DataPublicacion, token: string) {
+export function CreatePublicacion(
+  dataPubli: DataPublicacion | null,
+  token: string
+) {
   const [publicacionesUser, setPublicacionesUser] =
     useRecoilState(publicacionUser);
   const api = '/user/publicacion';
@@ -378,7 +381,7 @@ export function CreatePublicacion(dataPubli: DataPublicacion, token: string) {
     body: JSON.stringify(dataPubli),
   };
   const {data, isLoading} = useSWRImmutable(
-    dataPubli.id !== 0 ? [api, option] : null,
+    dataPubli ? [api, option] : null,
     fetchApiSwr
   );
   useEffect(() => {

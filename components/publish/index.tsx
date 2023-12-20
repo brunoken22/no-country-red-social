@@ -11,6 +11,7 @@ import {TemplatePhotoProfile} from '@/ui/templatePhotoProfile';
 import EmojiPicker, {EmojiStyle} from 'emoji-picker-react';
 import {useRecoilValue} from 'recoil';
 import {user} from '@/lib/atom';
+import {CreatePublicacion} from '@/lib/hook';
 const itemPublic = [
   {text: 'Trasmisión en vivo', svg: <CameraSvg />},
   {text: 'Fotos y videos', svg: <GaleriaSvg />},
@@ -20,8 +21,13 @@ export function Publish() {
   const [openCreatePubli, setOpenCreatePubli] = useState(false);
   const [changePublic, setChangePublic] = useState('');
   const [openEmoji, setOpenEmoji] = useState(false);
+  const [dataPublish, setDataPublish] = useState<DataPublicacion | null>(null);
   const userDataRecoil = useRecoilValue(user);
+  const token =
+    typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+  const {data, isLoading} = CreatePublicacion(dataPublish, token as string);
 
+  // const handleSubmit = (event)=>{}
   return userDataRecoil ? (
     <div className='flex gap-4 p-4 border-2 border-b-[5px] border-primary rounded-md items-center text-primary'>
       <Link href={'/profile'} className=' hover:opacity-70'>
@@ -72,7 +78,7 @@ export function Publish() {
                 <CloseSvg />
               </button>
             </div>
-            <div className='flex justify-between h-full flex-col gap-4'>
+            <form className='flex justify-between h-full flex-col gap-4'>
               <div className='flex gap-4 flex-col relative'>
                 <div className='flex gap-4 items-center'>
                   <TemplatePhotoProfile
@@ -130,7 +136,7 @@ export function Publish() {
                   <button className='text-center p-2 w-full '>Publicar</button>
                 </div>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       ) : null}

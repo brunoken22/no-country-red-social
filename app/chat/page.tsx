@@ -1,3 +1,10 @@
+import {ChatComponents} from '@/components/chat';
+import {NavegationComponent} from '@/components/navegation';
+
 export default function Chat() {
-  return <div>Chat</div>;
+  return (
+    <NavegationComponent>
+      <ChatComponents />
+    </NavegationComponent>
+  );
 }

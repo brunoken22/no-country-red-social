@@ -49,7 +49,7 @@ export function ChatComponents() {
       </div>
       <div className='flex flex-col items-center justify-center gap-4 max-md:hidden relative'>
         {openChat ? (
-          <div className='absolute inset-0 m-4 border-2 border-primary flex flex-col justify-between bottom-4 z-10 md:hidden'>
+          <div className='absolute inset-0 m-4 border-2 border-primary flex flex-col justify-between bottom-4 z-10 '>
             <div className='bg-primary flex items-center justify-between text-white p-2'>
               <div className='flex gap-2 items-center'>
                 <TemplatePhotoProfile width='w-[60px]' height='h-[60px]' />

@@ -17,8 +17,8 @@ type Publicacion = {
   comentarios?: [];
   userId?: number;
   open?: boolean;
-  fullName: string;
-  imgUser: string;
+  fullName?: string;
+  imgUser?: string;
 };
 
 type Message = {

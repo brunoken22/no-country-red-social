@@ -5,7 +5,6 @@ import HomeSvg from '@/ui/icons/home.svg';
 import ChatSvg from '@/ui/icons/chat.svg';
 import NotifiSvg from '@/ui/icons/notification.svg';
 import HelpSvg from '@/ui/icons/help.svg';
-import {TemplatePhotoProfile} from '@/ui/templatePhotoProfile';
 
 const navegationOfHome = [
   {text: 'Inicio', link: '/home', svg: <HomeSvg />},
@@ -45,16 +44,6 @@ export function NavegationComponent({children}: {children: React.ReactNode}) {
           </div>
         </div>
       </div>
-      {/* <div className='flex w-[300px]'>
-        <div>
-          <h4>Nuevas</h4>
-          <button>
-            <TemplatePhotoProfile width='w-[40px]' height='h-[40px]' /> A
-            Allison S. le gustó tu publicaión
-          </button>
-        </div>
-        <div></div>
-      </div> */}
       <div
         className={` p-4 ${
           pathname == '/chat' ? 'block' : 'grid grid-rows-[repeat(1,auto_1fr)]'

@@ -16,14 +16,12 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang='es'>
       <body className={roboto.className}>
-        <Suspense fallback={<Loading></Loading>}>
-          <Layout>
-            <Header />
-            <div className='max-w-[1050px] m-auto h-full pt-[4.5rem]'>
-              {children}
-            </div>
-          </Layout>
-        </Suspense>
+        <Layout>
+          <Header />
+          <div className='max-w-[1050px] m-auto h-full pt-[4.5rem]'>
+            {children}
+          </div>
+        </Layout>
       </body>
     </html>
   );

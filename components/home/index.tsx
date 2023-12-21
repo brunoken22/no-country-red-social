@@ -9,6 +9,7 @@ import {useState} from 'react';
 
 export function HomeComponents() {
   const userDataRecoil = useRecoilValue(user);
+  const publicacionesAllAmigos = useRecoilValue(publicacionAmigos);
   const [pagePubli, setPagePubli] = useState(0);
   const token =
     typeof window !== 'undefined'
@@ -24,9 +25,9 @@ export function HomeComponents() {
         <Publish />
       </div>
 
-      {dataPubliAllAmigosSwr?.length && userDataRecoil ? (
+      {publicacionesAllAmigos?.length && userDataRecoil ? (
         <div className='flex flex-col gap-6 mt-8 max-md:mt-4'>
-          {dataPubliAllAmigosSwr.map((item: Publicacion) => (
+          {publicacionesAllAmigos.map((item: Publicacion) => (
             <TemplatePublications
               key={item.id}
               description={item.description}
@@ -43,15 +44,6 @@ export function HomeComponents() {
               }
             />
           ))}
-          {dataPubliAllAmigosSwr.length == 10 && (
-            <div className='flex items-center justify-center'>
-              <button
-                onClick={() => setPagePubli((prev) => prev + 10)}
-                className='text-primary hover:opacity-70'>
-                Más
-              </button>
-            </div>
-          )}
         </div>
       ) : (
         <div className='text-center font-bold text-[1.5rem]'>

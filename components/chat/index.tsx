@@ -47,7 +47,7 @@ export function ChatComponents() {
         </div>
         {}
       </div>
-      <div className='flex flex-col items-center justify-center gap-4 max-md:hidden relative'>
+      <div className='flex flex-col items-center justify-center gap-4 max-md:hidden relative p-2'>
         {openChat ? (
           <div className='absolute inset-0 m-4 border-2 border-primary flex flex-col justify-between bottom-4 z-10 '>
             <div className='bg-primary flex items-center justify-between text-white p-2'>

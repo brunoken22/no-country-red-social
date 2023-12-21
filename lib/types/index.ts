@@ -43,11 +43,11 @@ type DataUser = {
   img?: string;
 };
 type DataPublicacion = {
-  id: number;
-  description: string;
-  like: number;
-  img: string;
-  comentarios: [];
+  id?: number;
+  description?: string;
+  like?: number;
+  img?: string;
+  comentarios?: [];
   fecha: string;
 };
 type DataSingin = {

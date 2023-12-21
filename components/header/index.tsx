@@ -7,7 +7,7 @@ import {useEffect, useRef, useState} from 'react';
 import {useRecoilValue} from 'recoil';
 import {user} from '@/lib/atom';
 import {TemplatePhotoProfile} from '@/ui/templatePhotoProfile';
-import {GetUser} from '@/lib/hook';
+import {GetAllPublicacionesUser, GetUser} from '@/lib/hook';
 const lilita_One = Lilita_One({subsets: ['latin'], weight: '400'});
 
 const navegationLink = [
@@ -19,10 +19,16 @@ export function Header() {
   const pathname = usePathname();
   const [openSettingUser, setOpenSettingUser] = useState(false);
   const userDataRecoil = useRecoilValue(user);
+  const [pagePubli, setPagePubli] = useState(0);
   const token =
     typeof window !== 'undefined'
       ? (localStorage.getItem('token') as string)
       : '';
+  const {dataPubliAllAmigosSwr, isLoadingAllAmigos} = GetAllPublicacionesUser(
+    token,
+    pagePubli
+  );
+
   GetUser(token);
   return (
     pathname !== '/' &&
@@ -30,7 +36,7 @@ export function Header() {
       <header className='bg-primary text-white fixed right-0	 left-0 z-10'>
         <nav className='flex justify-between items-center ml-[2rem] mr-[2rem]  max-md:ml-1 max-md:mr-1 gap-4 max-md:p-2'>
           <Link
-            href={'/'}
+            href={'/home'}
             className={`${lilita_One.className} text-[3rem] max-md:text-[1.5rem] `}>
             Interactify
           </Link>
@@ -67,15 +73,12 @@ export function Header() {
                     <div
                       className='absolute bg-white text-primary p-4 right-0 '
                       onBlur={() => {
-                        console.log('click');
                         setOpenSettingUser(false);
                       }}>
                       <Link
                         href={'/profile'}
                         className='font-medium hover:opacity-70 block'
-                        onBlur={() => {
-                          console.log('Focus');
-                        }}>
+                        onBlur={() => {}}>
                         Perfil
                       </Link>
                       <Link

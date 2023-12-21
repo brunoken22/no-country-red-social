@@ -230,15 +230,13 @@ export function GetAllPublicaciones(token: string, offset: number) {
     },
   };
 
-  const {data, isLoading} = useSWR(token ? [api, option] : null, fetchApiSwr, {
-    revalidateOnReconnect: true,
-    revalidateOnMount: true,
-    revalidateOnFocus: true,
-    refreshInterval: 100000,
-  });
+  const {data, isLoading} = useSWRImmutable(
+    token ? [api, option] : null,
+    fetchApiSwr
+  );
 
   useEffect(() => {
-    if (data?.length) {
+    if (data?.length && !publicacionesAllAmigos.length) {
       if (publicacionesAllAmigos.length > 0 && offset !== 0) {
         setPublicacionesAllAmigos((prev: any) => [...prev, ...data]);
         return;
@@ -264,19 +262,13 @@ export function GetAllPublicacionesUser(token: string, offset: number) {
       Authorization: `Bearer ${token}`,
     },
   };
-  const {data, isLoading, error} = useSWR(
+  const {data, isLoading, error} = useSWRImmutable(
     token ? [api, option] : null,
-    fetchApiSwr,
-    {
-      revalidateOnReconnect: true,
-      revalidateOnMount: true,
-      revalidateOnFocus: true,
-      refreshInterval: 100000,
-    }
+    fetchApiSwr
   );
 
   useEffect(() => {
-    if (data) {
+    if (data && !publicacionesUser.length) {
       if (publicacionesUser.length > 0 && offset !== 0) {
         setPublicacionesUser((prev: any) => [...prev, ...data]);
         return;

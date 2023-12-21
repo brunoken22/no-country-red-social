@@ -3,15 +3,13 @@ import CameraSvg from '@/ui/icons/camera.svg';
 import EmojiSvg from '@/ui/icons/emoji.svg';
 import GaleriaSvg from '@/ui/icons/galeria.svg';
 import EditSvg from '@/ui/icons/edit.svg';
-import UserSvg from '@/ui/icons/user.svg';
 import CloseSvg from '@/ui/icons/close.svg';
 import Link from 'next/link';
 import {useState} from 'react';
 import {TemplatePhotoProfile} from '@/ui/templatePhotoProfile';
 import EmojiPicker, {EmojiStyle} from 'emoji-picker-react';
-import {useRecoilValue} from 'recoil';
-import {user} from '@/lib/atom';
-import {CreatePublicacion} from '@/lib/hook';
+import {useRecoilState, useRecoilValue} from 'recoil';
+import {publicacionAmigos, publicacionUser, user} from '@/lib/atom';
 const itemPublic = [
   {text: 'Trasmisión en vivo', svg: <CameraSvg />},
   {text: 'Fotos y videos', svg: <GaleriaSvg />},
@@ -19,15 +17,39 @@ const itemPublic = [
 ];
 export function Publish() {
   const [openCreatePubli, setOpenCreatePubli] = useState(false);
+  const [publicacionUserData, setPublicacionUserData] =
+    useRecoilState(publicacionUser);
   const [changePublic, setChangePublic] = useState('');
   const [openEmoji, setOpenEmoji] = useState(false);
-  const [dataPublish, setDataPublish] = useState<DataPublicacion | null>(null);
   const userDataRecoil = useRecoilValue(user);
-  const token =
-    typeof window !== 'undefined' ? localStorage.getItem('token') : null;
-  const {data, isLoading} = CreatePublicacion(dataPublish, token as string);
+  const [publicacionesAllAmigos, setPublicacionesAllAmigos] =
+    useRecoilState(publicacionAmigos);
+  const hadnleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleDateString();
+    const newPublic = {
+      id: (Math.random() * 100).toString(),
+      description: changePublic,
+      like: 0,
+      img: '',
+      comentarios: [],
+      fecha: formattedDate,
+      fullName: userDataRecoil.user.fullName,
+      imgUser: userDataRecoil.user.img,
+      userId: userDataRecoil.user.id,
+    };
+    setPublicacionUserData((prev: any) => [newPublic, ...prev]);
+    setPublicacionesAllAmigos((prev: any) => [newPublic, ...prev]);
+    setTimeout(() => {
+      setChangePublic('');
+      document.body.style.overflow = 'auto';
+      setOpenCreatePubli(false);
+    }, 500);
+  };
+  // console.log(publicacionesAllAmigos);
+  // console.log(publicacionUserData);
 
-  // const handleSubmit = (event)=>{}
   return userDataRecoil ? (
     <div className='flex gap-4 p-4 border-2 border-b-[5px] border-primary rounded-md items-center text-primary'>
       <Link href={'/profile'} className=' hover:opacity-70'>
@@ -78,7 +100,9 @@ export function Publish() {
                 <CloseSvg />
               </button>
             </div>
-            <form className='flex justify-between h-full flex-col gap-4'>
+            <form
+              onSubmit={hadnleSubmit}
+              className='flex justify-between h-full flex-col gap-4'>
               <div className='flex gap-4 flex-col relative'>
                 <div className='flex gap-4 items-center'>
                   <TemplatePhotoProfile

@@ -16,7 +16,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
       <body className={roboto.className}>
         <Layout>
           <Header />
-          <div className='max-w-[1250px] m-auto h-full pt-[4.5rem]'>
+          <div className='max-w-[1050px] m-auto h-full pt-[4.5rem]'>
             {children}
           </div>
         </Layout>

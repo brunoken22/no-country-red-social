@@ -13,7 +13,7 @@ export function TemplatePublications(props: Publicacion) {
         />
         <div>
           <h2 className='font-bold text-[1.2rem]'>{props.fullName}</h2>
-          <p>@prueba</p>
+          <p>@uniRed</p>
         </div>
       </div>
       {props.description && (
@@ -22,8 +22,12 @@ export function TemplatePublications(props: Publicacion) {
         </div>
       )}
       {props.img && (
-        <div className='p-2'>
-          <img src={props.img} alt='user' className='w-full' />
+        <div className='p-2 h-[400px]'>
+          <img
+            src={props.img}
+            alt='user'
+            className='w-full h-full object-contain'
+          />
         </div>
       )}
       <div className='flex gap-8 border-t-[1px] border-t-primary p-4'>

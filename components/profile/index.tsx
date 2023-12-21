@@ -65,15 +65,6 @@ export function ProfileComponent() {
               imgUser={userDataRecoil.user.img}
             />
           ))}
-          {dataPubliAllAmigosSwr.length == 10 && (
-            <div className='flex items-center justify-center'>
-              <button
-                onClick={() => setPagePubli((prev) => prev + 10)}
-                className='text-primary hover:opacity-70'>
-                Más
-              </button>
-            </div>
-          )}
         </div>
       ) : (
         <div className='text-center font-bold text-[1.5rem]'>

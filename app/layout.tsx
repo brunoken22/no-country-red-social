@@ -3,6 +3,8 @@ import {Roboto} from 'next/font/google';
 import {Header} from '@/components/header';
 import './globals.css';
 import {Layout} from '@/components/layout';
+import {Suspense} from 'react';
+import Loading from './loading';
 const roboto = Roboto({subsets: ['latin'], weight: '300'});
 
 export const metadata: Metadata = {
@@ -14,12 +16,14 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang='es'>
       <body className={roboto.className}>
-        <Layout>
-          <Header />
-          <div className='max-w-[1050px] m-auto h-full pt-[4.5rem]'>
-            {children}
-          </div>
-        </Layout>
+        <Suspense fallback={<Loading></Loading>}>
+          <Layout>
+            <Header />
+            <div className='max-w-[1050px] m-auto h-full pt-[4.5rem]'>
+              {children}
+            </div>
+          </Layout>
+        </Suspense>
       </body>
     </html>
   );

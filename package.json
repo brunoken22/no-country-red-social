@@ -11,10 +11,12 @@
   "dependencies": {
     "emoji-picker-react": "^4.5.16",
     "image-conversion": "^2.1.1",
+    "ldrs": "^1.0.1",
     "next": "14.0.4",
     "next-svgr": "^0.0.2",
     "react": "^18",
     "react-dom": "^18",
+    "react-spinners": "^0.13.8",
     "recoil": "^0.7.7",
     "swr": "^2.2.4"
   },

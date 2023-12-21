@@ -15,7 +15,7 @@ const navegationOfHome = [
 export function NavegationComponent({children}: {children: React.ReactNode}) {
   const pathname = usePathname();
   return (
-    <div className='grid grid-cols-[repeat(1,300px_1fr)] h-full max-md:block'>
+    <div className='grid grid-cols-[repeat(1,300px_1fr)] h-full max-md:block max-md:relative'>
       <div className='border-r-4 border-r-primary'>
         <div className='flex flex-col justify-between pt-16 pb-8  max-md:hidden fixed bottom-0 top-[4.5rem] w-[300px]'>
           <div className='flex flex-col gap-8 '>

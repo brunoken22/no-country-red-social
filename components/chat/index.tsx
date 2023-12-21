@@ -82,7 +82,7 @@ export function ChatComponents() {
                 className='bg-gray-100 w-full'
                 required
               />
-              <button className='p-2 border-2 border-primary opacity-70'>
+              <button className='p-2 border-2 border-primary hover:opacity-70'>
                 Enviar
               </button>
             </form>

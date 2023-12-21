@@ -81,11 +81,6 @@ export function Header() {
                         onBlur={() => {}}>
                         Perfil
                       </Link>
-                      <Link
-                        href={'/setting'}
-                        className='font-medium hover:opacity-70 block'>
-                        configuración
-                      </Link>
                     </div>
                   </>
                 ) : null}

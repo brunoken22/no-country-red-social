@@ -47,8 +47,6 @@ export function Publish() {
       setOpenCreatePubli(false);
     }, 500);
   };
-  // console.log(publicacionesAllAmigos);
-  // console.log(publicacionUserData);
 
   return userDataRecoil ? (
     <div className='flex gap-4 p-4 border-2 border-b-[5px] border-primary rounded-md items-center text-primary'>

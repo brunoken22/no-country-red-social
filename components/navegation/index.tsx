@@ -5,7 +5,7 @@ import HomeSvg from '@/ui/icons/home.svg';
 import ChatSvg from '@/ui/icons/chat.svg';
 import NotifiSvg from '@/ui/icons/notification.svg';
 import HelpSvg from '@/ui/icons/help.svg';
-
+import Setting from '@/ui/icons/settings.svg';
 const navegationOfHome = [
   {text: 'Inicio', link: '/home', svg: <HomeSvg />},
   {text: 'Notificaciones', link: '/notification', svg: <NotifiSvg />},
@@ -34,7 +34,13 @@ export function NavegationComponent({children}: {children: React.ReactNode}) {
               </Link>
             ))}
           </div>
-          <div className='w-[70%]'>
+          <div className='w-[70%] flex flex-col gap-4'>
+            <Link
+              href={'/setting'}
+              className='font-bold flex gap-4 hover:text-primary'>
+              <Setting />
+              Configuración
+            </Link>
             <Link
               href={'/help'}
               className='font-bold flex gap-4 hover:text-primary'>

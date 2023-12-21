@@ -20,6 +20,7 @@ export function Publish() {
   const [publicacionUserData, setPublicacionUserData] =
     useRecoilState(publicacionUser);
   const [changePublic, setChangePublic] = useState('');
+  const [imagenASubir, setImagenASubir] = useState('');
   const [openEmoji, setOpenEmoji] = useState(false);
   const userDataRecoil = useRecoilValue(user);
   const [publicacionesAllAmigos, setPublicacionesAllAmigos] =
@@ -32,7 +33,7 @@ export function Publish() {
       id: (Math.random() * 100).toString(),
       description: changePublic,
       like: 0,
-      img: '',
+      img: imagenASubir,
       comentarios: [],
       fecha: formattedDate,
       fullName: userDataRecoil.user.fullName,
@@ -47,7 +48,20 @@ export function Publish() {
       setOpenCreatePubli(false);
     }, 500);
   };
-
+  const handleChange = (e: React.ChangeEvent) => {
+    e.preventDefault();
+    const target = e.target as HTMLFormElement;
+    let imgAsubir = '';
+    if (target.value) {
+      let file = target.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImagenASubir(reader.result as string);
+        imgAsubir = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+    }
+  };
   return userDataRecoil ? (
     <div className='flex gap-4 p-4 border-2 border-b-[5px] border-primary rounded-md items-center text-primary'>
       <Link href={'/profile'} className=' hover:opacity-70'>
@@ -121,14 +135,28 @@ export function Publish() {
                     placeholder={`Qué estás pensando ${userDataRecoil.user.fullName}?`}
                     value={changePublic}></textarea>
                 </div>
+                {imagenASubir ? <img src={imagenASubir} alt='subir' /> : null}
               </div>
               <div className='flex flex-col gap-6'>
                 <div className='flex justify-between rounded-lg border-2 border-[#2b2a2a] p-2'>
                   <h2 className=''>Agregar a tu publicación</h2>
                   <div className='flex gap-4 relative'>
-                    <button className=' hover:opacity-70'>
-                      <GaleriaSvg />
-                    </button>
+                    <div className='hover:opacity-70'>
+                      <input
+                        type='file'
+                        accept='image/png,image/jpeg,image/wepb'
+                        name='imagenInput'
+                        max={1}
+                        src='@/ui/icons/galeria.svg'
+                        className='hidden'
+                        id='galeriaSvg'
+                        onChange={handleChange}
+                      />
+                      <label htmlFor='galeriaSvg' className='bg-red-600'>
+                        {' '}
+                        <GaleriaSvg />
+                      </label>
+                    </div>
                     <button
                       className=' hover:opacity-70'
                       onClick={() => setOpenEmoji(!openEmoji)}>

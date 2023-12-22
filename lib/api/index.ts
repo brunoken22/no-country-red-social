@@ -5,3 +5,5 @@ export async function fetchApiSwr(prop: [string, object]) {
   const data = await response.json();
   return data;
 }
+// https://red-social-node.vercel.app/
+// 'https://red-social-node.onrender.com'

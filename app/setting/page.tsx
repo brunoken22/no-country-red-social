@@ -1,3 +1,10 @@
+import {NavegationComponent} from '@/components/navegation';
+import {SettingComponents} from '@/components/setting';
+
 export default function Setting() {
-  return <div>Setting</div>;
+  return (
+    <NavegationComponent>
+      <SettingComponents />
+    </NavegationComponent>
+  );
 }

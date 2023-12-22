@@ -124,15 +124,13 @@ export function GetUser(token: string) {
       Authorization: `Bearer ${token}`,
     },
   };
-  const {data, isLoading} = useSWR(token ? [api, option] : null, fetchApiSwr, {
-    revalidateOnMount: true,
-    revalidateOnFocus: true,
-    revalidateOnReconnect: true,
-    refreshInterval: 1000,
-  });
+  const {data, isLoading} = useSWRImmutable(
+    token ? [api, option] : null,
+    fetchApiSwr
+  );
 
   useEffect(() => {
-    if (data?.getUserRes?.id) {
+    if (data?.getUserRes?.id && !userData.user?.id) {
       setUserData({
         token,
         user: {

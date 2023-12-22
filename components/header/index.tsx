@@ -30,9 +30,9 @@ export function Header() {
     pagePubli
   );
   const {isLoading} = GetUser(token);
-  if (isLoadingAllAmigos || isLoading) {
-    return <LoaderComponents />;
-  }
+  // if (isLoadingAllAmigos || isLoading) {
+  //   return <LoaderComponents />;
+  // }
   return (
     pathname !== '/' &&
     userDataRecoil && (

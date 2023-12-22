@@ -3,6 +3,7 @@ import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import {CreateUser, SigninUser} from '@/lib/hook';
 import {useEffect, useState} from 'react';
+import {LoaderComponents} from '../loader';
 const formGroup = [
   {
     nombre: 'Nombre',
@@ -38,18 +39,13 @@ const formGroup = [
 
 export function SignupComponent() {
   const {push} = useRouter();
-  // const [dataUser, setDataUser] = useState<DataUser | null>(null);
-  // const {data, isLoading} = CreateUser(dataUser);
+
   const [formSignin, setFormSignin] = useState<DataSingin | null>(null);
 
   const {data, isLoading} = SigninUser(formSignin);
 
   useEffect(() => {
-    // if (data == 'Usuario Registrado') {
-    //   alert('Usuario registrado');
-    // }
     if (data?.user?.id) {
-      // setDataUser(null);
       alert('Usuario registrado con exito');
       localStorage.setItem('token', data.token);
       push('/home');
@@ -71,7 +67,9 @@ export function SignupComponent() {
       setFormSignin(newDataUser);
     }
   };
-
+  if (isLoading) {
+    return <LoaderComponents />;
+  }
   return (
     <div className='m-[2rem_10%] '>
       <h2 className='text-[3rem] border-b-primary	border-b-2 font-bold max-md:text-[1.5rem] max-md:border-none max-md:text-center'>

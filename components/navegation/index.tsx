@@ -4,9 +4,8 @@ import Link from 'next/link';
 import HomeSvg from '@/ui/icons/home.svg';
 import ChatSvg from '@/ui/icons/chat.svg';
 import NotifiSvg from '@/ui/icons/notification.svg';
-import HelpSvg from '@/ui/icons/help.svg';
 import Setting from '@/ui/icons/settings.svg';
-const navegationOfHome = [
+export const navegationOfHome = [
   {text: 'Inicio', link: '/home', svg: <HomeSvg />},
   {text: 'Notificaciones', link: '/notification', svg: <NotifiSvg />},
   {text: 'Chat', link: '/chat', svg: <ChatSvg />},

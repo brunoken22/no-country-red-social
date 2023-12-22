@@ -3,6 +3,7 @@ import {SigninUser} from '@/lib/hook';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import {useEffect, useState} from 'react';
+import {LoaderComponents} from '../loader';
 
 export function SigninComponent() {
   const {push} = useRouter();
@@ -29,6 +30,9 @@ export function SigninComponent() {
       password: process.env.NEXT_PUBLIC_PASSWORD as string,
     });
   };
+  if (isLoading) {
+    return <LoaderComponents />;
+  }
   return (
     <div className='m-[2rem_10%] '>
       <h2 className='text-[3rem] border-b-primary	border-b-2 font-bold max-md:text-[1.5rem] max-md:border-none max-md:text-center'>

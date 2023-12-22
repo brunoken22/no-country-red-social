@@ -2,13 +2,12 @@
 import {Lilita_One} from 'next/font/google';
 import {usePathname} from 'next/navigation';
 import Link from 'next/link';
-import UserSVG from '@/ui/icons/user.svg';
-import {useEffect, useRef, useState} from 'react';
+import {useState} from 'react';
 import {useRecoilValue} from 'recoil';
 import {user} from '@/lib/atom';
 import {TemplatePhotoProfile} from '@/ui/templatePhotoProfile';
 import {GetAllPublicacionesUser, GetUser} from '@/lib/hook';
-import {LoaderComponents} from '../loader';
+import {navegationOfHome} from '../navegation';
 const lilita_One = Lilita_One({subsets: ['latin'], weight: '400'});
 
 const navegationLink = [
@@ -30,9 +29,7 @@ export function Header() {
     pagePubli
   );
   const {isLoading} = GetUser(token);
-  // if (isLoadingAllAmigos || isLoading) {
-  //   return <LoaderComponents />;
-  // }
+
   return (
     pathname !== '/' &&
     userDataRecoil && (
@@ -60,6 +57,20 @@ export function Header() {
                   className='h-[40px] rounded-lg text-black indent-1 w-full'
                 />
               </div>
+              <div className='hidden max-sm:flex gap-2'>
+                {navegationOfHome.map((nav) => (
+                  <Link
+                    href={nav.link}
+                    key={nav.text}
+                    className={`flex gap-4 fill-white ${
+                      nav.text !== 'chat' ? '' : 'stroke-current'
+                    }  items-center  p-2 ${
+                      pathname == nav.link ? ' fill-gray-300 ' : ''
+                    }`}>
+                    {nav.svg}
+                  </Link>
+                ))}
+              </div>
               <div className='relative'>
                 <button
                   onClick={() => setOpenSettingUser(!openSettingUser)}
@@ -74,7 +85,7 @@ export function Header() {
                 {openSettingUser ? (
                   <>
                     <div
-                      className='absolute bg-white text-primary p-4 right-0 '
+                      className='absolute bg-white text-primary p-4 right-0 w-[130px]'
                       onBlur={() => {
                         setOpenSettingUser(false);
                       }}>
@@ -83,6 +94,12 @@ export function Header() {
                         className='font-medium hover:opacity-70 block'
                         onBlur={() => {}}>
                         Perfil
+                      </Link>
+                      <Link
+                        href={'/'}
+                        className='font-medium hover:opacity-70 block'
+                        onBlur={() => {}}>
+                        Cerrar sesión
                       </Link>
                     </div>
                   </>

@@ -130,7 +130,7 @@ export function GetUser(token: string) {
   );
 
   useEffect(() => {
-    if (data?.getUserRes?.id && !userData.user?.id) {
+    if (data?.getUserRes?.id && !userData?.user?.id) {
       setUserData({
         token,
         user: {

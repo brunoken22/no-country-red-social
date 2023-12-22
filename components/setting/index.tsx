@@ -11,8 +11,9 @@ export function SettingComponents() {
     e.preventDefault();
     const target = e.target as HTMLFormElement;
     setUserData((prev: any) => ({
-      ...prev,
+      ...prev.token,
       user: {
+        ...prev.user,
         fullName: target.nombre.value,
       },
     }));

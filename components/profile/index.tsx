@@ -9,7 +9,6 @@ import {publicacionUser, user} from '@/lib/atom';
 import {GetAllPublicacionesUser} from '@/lib/hook';
 import {useState} from 'react';
 const buttonEditUser = [
-  {text: 'Editar', link: '/', svg: <EditSvg />},
   {text: 'Configuración', link: '/setting', svg: <SettingSvg />},
 ];
 export function ProfileComponent() {

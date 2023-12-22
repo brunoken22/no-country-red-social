@@ -41,12 +41,6 @@ export function NavegationComponent({children}: {children: React.ReactNode}) {
               <Setting />
               Configuración
             </Link>
-            <Link
-              href={'/help'}
-              className='font-bold flex gap-4 hover:text-primary'>
-              <HelpSvg />
-              Ayuda
-            </Link>
           </div>
         </div>
       </div>
